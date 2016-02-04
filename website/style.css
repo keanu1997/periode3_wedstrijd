@@ -21,23 +21,12 @@ body {
 	flex-direction: column;
 }
 
-.textbox {
-	width: 1000px;
-	height: 20%;
-	background: #202020;
-}
-
-.textbox p {
-	margin: 30px;
-	padding: 10px;
-	color: #FFFFFF;
-	font-family: arial
-}
-
 .container {
 	width: 1100px;
-	height: 550px;
-	background: url(http://lorempizza.com/1100/550/);
+	height: 700px;
+	background: url(http://lorempizza.com/1100/700/);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
 }
 
 .selection {
@@ -47,18 +36,20 @@ body {
 }
 
 .option {
-	height: 100px;
-	width: 250px;
 	background: #B37700;
 	border-radius: 5px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
-.option p {
+.option a {
+	text-decoration: none;
+	color: black;
 	font-family: 'Indie Flower';
 	margin: 5px 5px 5px 5px;
 	font-weight: bold;
 	font-size: 20px;
+	height: 100px;
+	width: 250px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
