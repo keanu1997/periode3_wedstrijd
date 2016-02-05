@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>ghosthouse</title>
 	<link rel="stylesheet" href="scenes.css">
+	<link rel="stylesheet" href="story.css">
 	<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -19,11 +20,101 @@
 
 		<footer>
 			<ul>
-				<li><a href="subs/ghosthouse-door3-choice1.html">Je besluit om te keren en terug te gaan naar de hal</a></li>
-				<li><a href="hostpital.html">je besluit op de bank te gaan liggen en een dutje te doen</a></li>
-				<li><a href="subs/ghosthouse-door3-choice3.html">Je besluit een boek te gaan lezen aan het bureau om te ontspannen</a></li>
+				<li><a><button onclick="avgrund.activate( 'stack', '.popup1' );">Je besluit om te keren en terug te gaan naar de hal</button></a></li>
+				<li><a href="hostpital.html"><button onclick="avgrund.activate">je besluit op de bank te gaan liggen en een dutje te doen</button></a></li>
+				<li><a><button onclick="avgrund.activate( 'stack', '.popup2' );">Je besluit een boek te gaan lezen aan het bureau om te ontspannen</button></a></li>
+
 			</ul>
 		</footer>
 	</div>
+
+
+<div class="avgrund-cover"></div>
+
+	<aside class="avgrund-popup popup1">
+    	<p>Je hebt hier geen goed gevoel bij en draait je direct om. Net op het moment dat je door de deur wil lopen valt er een bijl naar beneden, van het harnas waar je niet op gelet hebt de eerste keer. Het lukt je net niet om hem te ontwijken en je rechterbeen is de pineut. Het bloed stroomt en spuit alle kanten op en je trekt wit weg. Na enige tijd met een helse pijn zo liggen wordt je langzaam duizelig. Je sluit je ogen om van de hoofdpijn af te komen, wetende dat je hier nooit meer levend vandaan komt. Je hebt je ogen nooit meer open gedaan.</p>
+    	<button class="popupbtn" onclick="avgrund.deactivate(window.activePopup);">Ga terug</button>
+  	</aside>
+
+  	<aside class="avgrund-popup popup2">
+   		<p>De boeken op de boekenplank zien er erg interessant uit. Oude verhalen van Sherlock zie je voorbij komen en je wilde er altijd wel eentje lezen. Je kiest er eentje uit en gaat op de luxe bureaustoel zitten. Het boek voor je neus sla je open en je begint lekker te lezen. Na een tijdje wordt je erg slaperig en er hangt een rare geur in de kamer. Je kijkt op en ziet een lichtgroene walm om je heen. Je schrikt meteen op maar je lichaam is al te verslapt. Tevergeefs probeer je op te staan, je zakt meteen weer naar de grond. Ademen wordt steeds lastiger. Na een korte tijd krijg je helemaal geen lucht meer en zakt je lichaam levenloos in elkaar op de grond.</p>
+    	<button class="popupbtn" onclick="avgrund.deactivate(window.activePopup);">Ga terug</button>
+  </aside>
+
+
+
+	<script>
+  (function(){
+
+  var container = document.documentElement,
+    cover = document.querySelector( '.avgrund-cover' ),
+    currentState = null;
+  window.activePopup = null;
+
+  addClass( container, 'avgrund-ready' );
+
+  // Deactivate on ESC
+  function onDocumentKeyUp( event ) {
+    if( event.keyCode === 27 ) {
+      deactivate(window.activePopup);
+    }
+  }
+
+  // Deactivate on click outside
+  function onDocumentClick( event ) {
+    if( event.target === cover ) {
+      deactivate(window.activePopup);
+    }
+  }
+
+  function activate( state, popupSelector ) {
+    var popup = document.querySelector(popupSelector);
+    document.addEventListener( 'keyup', onDocumentKeyUp, false );
+    document.addEventListener( 'click', onDocumentClick, false );
+
+    removeClass( popup, currentState );
+    addClass( popup, 'no-transition' );
+    addClass( popup, state );
+    addClass( popup, 'active');
+
+    window.activePopup = popup;
+
+    setTimeout( function() {
+      removeClass( popup, 'no-transition' );
+      addClass( container, 'avgrund-active' );
+    }, 0 );
+
+    currentState = state;
+  }
+
+  function deactivate(popup) {
+    document.removeEventListener( 'keyup', onDocumentKeyUp, false );
+    document.removeEventListener( 'click', onDocumentClick, false );
+
+    removeClass( popup, 'active');
+
+    removeClass( container, 'avgrund-active' );
+  }
+
+  function disableBlur() {
+    addClass( document.documentElement, 'no-blur' );
+  }
+
+  function addClass( element, name ) {
+    element.className = element.className.replace( /\s+$/gi, '' ) + ' ' + name;
+  }
+
+  function removeClass( element, name ) {
+    element.className = element.className.replace( name, '' );
+  }
+
+  window.avgrund = {
+    activate: activate,
+    deactivate: deactivate,
+    disableBlur: disableBlur
+  }
+
+})();
+  </script>
 </body>
 </html>

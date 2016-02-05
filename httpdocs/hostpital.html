@@ -4,7 +4,10 @@
 	<meta charset="UTF-8">
 	<title>ghosthouse</title>
 	<link rel="stylesheet" href="scenes.css">
+	<link rel="stylesheet" href="story.css">
 	<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+
 </head>
 <body>
 	<div class="background hostpital">
@@ -19,11 +22,100 @@
 
 		<footer>
 			<ul>
-				<li><a href="subs/hostpital-choice1.html">Je stemt mee met de zuster voor de operatie</a></li>
-				<li><a href="subs/hostpital-choice2.html">Je zegt dat je liever euthanasie pleegt</a></li>
-				<li><a href="graveyard.html">Je zegt dat je er even over na wil denken en sluipt weg wanneer de zuster vertrokken is</a></li>
+				<li><a><button onclick="avgrund.activate( 'stack', '.popup1' );">Je stemt mee met de zuster voor de operatie</button></a></li>
+				<li><a><button onclick="avgrund.activate( 'stack', '.popup2' );">Je zegt dat je liever euthanasie pleegt</button></a></li>
+				<li><a href="graveyard.html"><button onclick="avgrund.activate">Je zegt dat je er even over na wil denken en sluipt weg wanneer de zuster vertrokken is</button></a></li>
 			</ul>
 		</footer>
 	</div>
+
+
+
+<div class="avgrund-cover"></div>
+
+	<aside class="avgrund-popup popup1">
+    	<p>De zuster is blij te horen dat je het toch wil proberen en je kan meteen terecht. De artsen staan al voor je klaar wanneer je in je bed naar binnen gereden wordt. Je krijgt een verdoving en valt voorzichtig in slaap. Je denkt dat je in goede handen bent en valt nog dieper weg. Tijdens de operatie gaat het helemaal niet zoals afgesproken. De artsen snijden je open en halen je hart eruit. Je hart gooien ze in een kist en ze naaien jouw lichaam weer dicht, zonder hart. Alle bloedvaten spuiten binnen het levenloze lichaam al hun bloed naar buiten maar je was al dood. Je had deze ‘lieve’ zuster niet moeten vertrouwen</p>
+    	<button class="popupbtn" onclick="avgrund.deactivate(window.activePopup);">Ga terug</button>
+  	</aside>
+
+  	<aside class="avgrund-popup popup2">
+   		<p>Je kiest ervoor dat zij een einde aan je leven komt maken, je bent er helemaal klaar mee na de situatie. Ze vindt het erg om te horen maar begrijpt je keuze wel. Eerst brengt ze je onder narcose, om het allemaal wat minder pijnlijk voor je te maken. Echter, ze komt niet met een tweede spuit aanzetten maar met een lijkzak. Ze stopt je zonder pardon erin en gooit je ergens in een hoek. Wanneer je weer ontwaakt merk je meteen dat je vast zit in een zak. Je probeert jezelf te bevrijden maar dat lukt niet. De lijkzak laat geen zuurstof binnen en je stikt</p>
+    	<button class="popupbtn" onclick="avgrund.deactivate(window.activePopup);">Ga terug</button>
+  </aside>
+
+
+	 <script>
+  (function(){
+
+  var container = document.documentElement,
+    cover = document.querySelector( '.avgrund-cover' ),
+    currentState = null;
+  window.activePopup = null;
+
+  addClass( container, 'avgrund-ready' );
+
+  // Deactivate on ESC
+  function onDocumentKeyUp( event ) {
+    if( event.keyCode === 27 ) {
+      deactivate(window.activePopup);
+    }
+  }
+
+  // Deactivate on click outside
+  function onDocumentClick( event ) {
+    if( event.target === cover ) {
+      deactivate(window.activePopup);
+    }
+  }
+
+  function activate( state, popupSelector ) {
+    var popup = document.querySelector(popupSelector);
+    document.addEventListener( 'keyup', onDocumentKeyUp, false );
+    document.addEventListener( 'click', onDocumentClick, false );
+
+    removeClass( popup, currentState );
+    addClass( popup, 'no-transition' );
+    addClass( popup, state );
+    addClass( popup, 'active');
+
+    window.activePopup = popup;
+
+    setTimeout( function() {
+      removeClass( popup, 'no-transition' );
+      addClass( container, 'avgrund-active' );
+    }, 0 );
+
+    currentState = state;
+  }
+
+  function deactivate(popup) {
+    document.removeEventListener( 'keyup', onDocumentKeyUp, false );
+    document.removeEventListener( 'click', onDocumentClick, false );
+
+    removeClass( popup, 'active');
+
+    removeClass( container, 'avgrund-active' );
+  }
+
+  function disableBlur() {
+    addClass( document.documentElement, 'no-blur' );
+  }
+
+  function addClass( element, name ) {
+    element.className = element.className.replace( /\s+$/gi, '' ) + ' ' + name;
+  }
+
+  function removeClass( element, name ) {
+    element.className = element.className.replace( name, '' );
+  }
+
+  window.avgrund = {
+    activate: activate,
+    deactivate: deactivate,
+    disableBlur: disableBlur
+  }
+
+})();
+  </script>
 </body>
 </html>

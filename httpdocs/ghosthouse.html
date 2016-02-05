@@ -4,7 +4,10 @@
 	<meta charset="UTF-8">
 	<title>ghosthouse</title>
 	<link rel="stylesheet" href="scenes.css">
+	<link rel="stylesheet" href="story.css">
 	<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+
 </head>
 <body>
 	<div class="background ghosthouse">
@@ -19,11 +22,100 @@
 
 		<footer>
 			<ul>
-				<li><a href="subs/ghosthouse-door1.html">Betreed deur 1</a></li>
-				<li><a href="subs/ghosthouse-door1.html">Betreed deur 2</a></li>
-				<li><a href="ghosthouse-door3.html">Betreed deur 3</a></li>
+				<li><a><button onclick="avgrund.activate( 'stack', '.popup1' );">Betreed deur 1</button></a></li>
+				<li><a><button onclick="avgrund.activate( 'stack', '.popup2' );">Betreed deur 2</button></a></li>
+				<li><a href="ghosthouse-door3.html"><button onclick="avgrund.activate">Betreed deur 3</button></a></li>
 			</ul>
 		</footer>
 	</div>
+
+
+
+<div class="avgrund-cover"></div>
+
+	<aside class="avgrund-popup popup1">
+    	<p>Wanneer je deze deur open maakt hoor je direct allemaal geluiden om je heen. Het begint bij het huilen van baby’s, vervolgens het gelach van wat oudere kinderen, het gejank van katten, wolven. Alle geluiden komen bij elkaar en het is een enorm kabaal. Je sluit je handen om je oren om jezelf ertegen te beschermen maar het helpt nauwelijks. Opeens vallen alle geluiden weg en is het doodstil in de kamer. Niet alleen is het zo stil, maar het is ook nog eens helemaal donker. Vanuit de duisternis zie je kleine lichtjes in paren verschijnen. Eerst worden ze groter maar dan zie je dat het helemaal geen lampjes zijn. Het zijn de ogen van wilde dieren die er niet bepaald overvoed uitzien. Ze willen vlees, jouw vlees. Je probeert de deur weer open te maken maar het heeft geen zin. De beesten vliegen op je af en rukken al het vlees van je botten. Je sterft een langzame, pijnlijke dood..</p>
+    	<button class="popupbtn" onclick="avgrund.deactivate(window.activePopup);">Ga terug</button>
+  	</aside>
+
+  	<aside class="avgrund-popup popup2">
+   		<p>Wanneer je voorzichtig door deze deur loopt wordt je meteen blij. Er staat een grote pilaar in het midden waar iets op ligt. Wat het precies is kan je nog niet zien. Je komt snel dichterbij de pilaar en hebt niet door dat de deur achter je dicht valt. Het voorwerp is een grote sleutel. Er hangt een klein kaartje aan wat zegt: ‘Dit is het einde van alle ellende, pak mij en u kunt hier weg.’ Het lezen van het kaartje maakt je blij en je grijpt meteen de sleutel. Je hoort een stroef geluid en merkt op dat je beweegt: de vloer zakt langzaam onder je vandaan. Onder de vloer was een vloer van messen gemaakt en je staat op het punt erin te vallen. Vluchten kan niet meer en de vloer is bijna verdwenen. Na de laatste centimeters van je naar beneden op het bed van messen. Je bent op slag dood.</p>
+    	<button class="popupbtn" onclick="avgrund.deactivate(window.activePopup);">Ga terug</button>
+  </aside>
+
+
+	 <script>
+  (function(){
+
+  var container = document.documentElement,
+    cover = document.querySelector( '.avgrund-cover' ),
+    currentState = null;
+  window.activePopup = null;
+
+  addClass( container, 'avgrund-ready' );
+
+  // Deactivate on ESC
+  function onDocumentKeyUp( event ) {
+    if( event.keyCode === 27 ) {
+      deactivate(window.activePopup);
+    }
+  }
+
+  // Deactivate on click outside
+  function onDocumentClick( event ) {
+    if( event.target === cover ) {
+      deactivate(window.activePopup);
+    }
+  }
+
+  function activate( state, popupSelector ) {
+    var popup = document.querySelector(popupSelector);
+    document.addEventListener( 'keyup', onDocumentKeyUp, false );
+    document.addEventListener( 'click', onDocumentClick, false );
+
+    removeClass( popup, currentState );
+    addClass( popup, 'no-transition' );
+    addClass( popup, state );
+    addClass( popup, 'active');
+
+    window.activePopup = popup;
+
+    setTimeout( function() {
+      removeClass( popup, 'no-transition' );
+      addClass( container, 'avgrund-active' );
+    }, 0 );
+
+    currentState = state;
+  }
+
+  function deactivate(popup) {
+    document.removeEventListener( 'keyup', onDocumentKeyUp, false );
+    document.removeEventListener( 'click', onDocumentClick, false );
+
+    removeClass( popup, 'active');
+
+    removeClass( container, 'avgrund-active' );
+  }
+
+  function disableBlur() {
+    addClass( document.documentElement, 'no-blur' );
+  }
+
+  function addClass( element, name ) {
+    element.className = element.className.replace( /\s+$/gi, '' ) + ' ' + name;
+  }
+
+  function removeClass( element, name ) {
+    element.className = element.className.replace( name, '' );
+  }
+
+  window.avgrund = {
+    activate: activate,
+    deactivate: deactivate,
+    disableBlur: disableBlur
+  }
+
+})();
+  </script>
 </body>
 </html>
