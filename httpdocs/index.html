@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>register</title>
+	<link rel="stylesheet" href="mystyle.css">
+	<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+	
+</head>
+<body>
+	<div class="pagewrapper">
+		<div class="container">
+			<form id="result">
+				<div class="form-group">
+					<label for="firstname">Voornaam :</label>
+					<input id="firstname" type="text" name="firstname" required>
+				</div>
+				<div class="form-group">
+					<label for="name">Achternaam :</label>
+					<input id="name" type="text" name="name" required>
+				</div>
+				<div class="form-group">
+					<label for="birth">Geboortedatum :</label>
+					<input id="birth" type="text" name="birth" placeholder="dd-mm-jjjj" required>
+				</div>
+				<a href="clown.html"><div id="submit"> Start Game </div></a>
+
+			</form>
+		</div>
+	</div>
+</body>
+<script>
+
+		$( "#submit" ).click( function() {
+			$( "#result" ).submit();
+		});
+		
+		$( "#result" ).submit( function( e ) {
+
+			store( "fn", $( "#firstname" ).val() )
+			store( "nm", $( "#name" ).val() )
+			store( "bd", $( "#birth" ).val() )
+			return false;
+		});
+
+
+		function store( key, value )
+		{
+			// Check browser support
+			if (typeof(Storage) !== "undefined") {
+			    
+			    localStorage.setItem( key, value );
+				return true;
+			} 
+
+			return false;
+		}
+
+
+		function retrieve( key )
+		{
+			return localStorage.getItem( key );
+		}
+	  
+
+	</script>
+</html>

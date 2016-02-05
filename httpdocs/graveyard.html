@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ghosthouse</title>
+	<link rel="stylesheet" href="scenes.css">
+	<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+	<div class="background graveyard">
+		<header>
+			<div class="story">
+				<h1>Doodlopend</h1>
+					<p>Het is een lastige keus die de zuster je voorlegt. Je geeft aan dat je er nog even over na wil denken maar had allang gezien dat de deur achter haar naar buiten open was. Ze knikt en loopt weg. Snel wurm je je onder die riemen vandaan en loopt voorzichtig naar de deur. Eerst nog even kijken of de zuster je niet ziet maar die is druk bezig. Snel hol je naar buiten en meteen daarna val je in een groot gat. Je hoofd doet pijn en je voelt zelfs bloed langs je wang stromen. Met succes probeer je uit het gat te klimmen. Je kijkt neer naar de plek waar je naar beneden viel. Je staat direct naast je eigen graf…</p>
+			</div>
+		</header>
+
+		<div class="main-content">
+			<div class="grave">
+				<ul>
+					<li><span class="name"></span>,&nbsp;<span class="ln"></span></li>
+					<li>born:&nbsp;<span class="bd"></span></li>
+					<li>died:&nbsp;05-02-2016</li>
+				</ul>
+			</div>
+		</div>
+
+		<footer>
+			<ul>
+				<h1>THE END</h1>
+			</ul>
+		</footer>
+	</div>
+
+	<script>
+		function replaceAll(elSelector, replacement){
+			$(elSelector).each(function(index, el){
+				$(el).text(replacement);
+			});
+		}
+
+		var name = localStorage.getItem('fn');
+		replaceAll('.name', name);
+
+		var ln = localStorage.getItem('nm');
+		replaceAll('.ln', ln);
+
+
+		var bd = localStorage.getItem('bd');
+		replaceAll('.bd', bd);
+	</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="subs.css">
+
+</head>
+<body>
+  <article class="avgrund-contents">
+
+  	<button onclick="avgrund.activate( 'stack' );">Story</button>
+
+  </article>
+
+  <div class="avgrund-cover"></div>
+
+  <aside class="avgrund-popup">
+  	<p>Je nadert de clown met een lach op je gezicht. Die ballon is mooi rond en dwarrelt een beetje in de wind. Net wanneer je je arm uitsteekt om het touwtje te pakken voel je iets om je pols heen geklemd worden. Je verstijft en trekt wit weg van schrik. Langzaam draai je je hoofd naar je pols. Een grote witte handschoen die je vasthoudt is te zien. Je draait je hoofd langzaam weer naar voren. De lach van de clown is veranderd in een hele enge grijns die alsmaar breder wordt. Je voelt iets pijnlijks in je buik en vervolgens een warme vloeistof. Alles wordt langzaam zwart voor je ogen en je zakt weg. Alles wat je nog ziet is de brede grijns van de clown en jouw ballon die wegwaait in de wind. Daarna wordt het zwart.</p>
+  	<button class="popupbtn" onclick="avgrund.deactivate();">Ga terug</button>
+  </aside>
+  
+  <script>
+  (function(){
+
+  var container = document.documentElement,
+    popup = document.querySelector( '.avgrund-popup' ),
+    cover = document.querySelector( '.avgrund-cover' ),
+    currentState = null;
+
+  addClass( container, 'avgrund-ready' );
+
+  // Deactivate on ESC
+  function onDocumentKeyUp( event ) {
+    if( event.keyCode === 27 ) {
+      deactivate();
+    }
+  }
+
+  // Deactivate on click outside
+  function onDocumentClick( event ) {
+    if( event.target === cover ) {
+      deactivate();
+    }
+  }
+
+  function activate( state ) {
+    document.addEventListener( 'keyup', onDocumentKeyUp, false );
+    document.addEventListener( 'click', onDocumentClick, false );
+
+    removeClass( popup, currentState );
+    addClass( popup, 'no-transition' );
+    addClass( popup, state );
+
+    setTimeout( function() {
+      removeClass( popup, 'no-transition' );
+      addClass( container, 'avgrund-active' );
+    }, 0 );
+
+    currentState = state;
+  }
+
+  function deactivate() {
+    document.removeEventListener( 'keyup', onDocumentKeyUp, false );
+    document.removeEventListener( 'click', onDocumentClick, false );
+
+    removeClass( container, 'avgrund-active' );
+  }
+
+  function disableBlur() {
+    addClass( document.documentElement, 'no-blur' );
+  }
+
+  function addClass( element, name ) {
+    element.className = element.className.replace( /\s+$/gi, '' ) + ' ' + name;
+  }
+
+  function removeClass( element, name ) {
+    element.className = element.className.replace( name, '' );
+  }
+
+  window.avgrund = {
+    activate: activate,
+    deactivate: deactivate,
+    disableBlur: disableBlur
+  }
+
+})();
+  </script>
+</body>
+</html>

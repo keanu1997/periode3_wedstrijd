@@ -1,0 +1,110 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+
+
+body {
+	background: #000;
+	font-family: 'Indie Flower';
+	font-weight: bold;
+	color: #5F0101;
+}
+
+.background {
+	
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+ 	 -o-background-size: cover;
+ 	 background-size: cover;
+ 	 height: 100%;
+ 	 display: flex;
+ 	 flex-direction: column;
+ 	 justify-content: space-between;
+}
+
+header {
+	display: flex;
+	justify-content: center;
+}
+
+footer, ul {
+	width: 100%;
+}
+
+ul {
+	display: flex;
+	justify-content: space-around;
+}
+
+li {
+	list-style: none;
+	background: rgba(227, 227, 227, 0.42);
+	border-radius: 5px;
+	margin-bottom: 15px;
+}
+
+a {
+	text-decoration: none;
+	color: #5F0101;
+	padding: 5px;
+	font-weight: bold;
+	font-size: 16px;
+	width: 250px;
+	display: flex;
+	justify-content: center;
+}
+
+/* backgrounds */
+.clown	{
+	background: url(img/20160204_webstrijd_ghosttown2.png) no-repeat center center fixed; 
+}
+
+.ghosthouse {
+	background: url(img/20160205_ghosthousestairs.png) no-repeat center center fixed; 
+}
+
+.ghosthouse-chamber3 {
+	background: url(img/20160205_ghosthouse_chamber3.png) no-repeat center center fixed;
+}
+
+.hostpital {
+	background: url(img/20160205_hostpital.jpg) no-repeat center center fixed;
+}
+
+.graveyard {
+	background: url(img/20160205_graveyard.png) no-repeat center center fixed;
+}
+
+
+/*===== ELEMENTS =========================*/
+.story {
+	width: 1200px;
+	background: rgba(227, 227, 227, 0.42);
+	padding: 20px;
+	font-size: 16px;
+	border-radius: 0 0 10px 10px;
+}
+
+.main-content {
+	display: flex;
+	justify-content: center;
+}
+
+.grave ul {
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+	height: 100px;
+	align-self: flex-star;
+}
+
+.grave li {
+	background: none;
+}

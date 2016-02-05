@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="subs.css">
+
+</head>
+<body>
+  <article class="avgrund-contents">
+
+  	<button onclick="avgrund.activate( 'stack' );">Story</button>
+
+  </article>
+
+  <div class="avgrund-cover"></div>
+
+  <aside class="avgrund-popup">
+  	<p>
+  		Wanneer je deze deur open maakt hoor je direct allemaal geluiden om je heen. Het begint bij het huilen van baby’s, vervolgens het gelach van wat oudere kinderen, het gejank van katten, wolven. Alle geluiden komen bij elkaar en het is een enorm kabaal. Je sluit je handen om je oren om jezelf ertegen te beschermen maar het helpt nauwelijks. Opeens vallen alle geluiden weg en is het doodstil in de kamer. Niet alleen is het zo stil, maar het is ook nog eens helemaal donker. Vanuit de duisternis zie je kleine lichtjes in paren verschijnen. Eerst worden ze groter maar dan zie je dat het helemaal geen lampjes zijn. Het zijn de ogen van wilde dieren die er niet bepaald overvoed uitzien. Ze willen vlees, jouw vlees. Je probeert de deur weer open te maken maar het heeft geen zin. De beesten vliegen op je af en rukken al het vlees van je botten. Je sterft een langzame, pijnlijke dood.
+  	</p>
+  	<button class="popupbtn" onclick="avgrund.deactivate();">Ga terug</button>
+  </aside>
+  
+  <script>
+  (function(){
+
+  var container = document.documentElement,
+    popup = document.querySelector( '.avgrund-popup' ),
+    cover = document.querySelector( '.avgrund-cover' ),
+    currentState = null;
+
+  addClass( container, 'avgrund-ready' );
+
+  // Deactivate on ESC
+  function onDocumentKeyUp( event ) {
+    if( event.keyCode === 27 ) {
+      deactivate();
+    }
+  }
+
+  // Deactivate on click outside
+  function onDocumentClick( event ) {
+    if( event.target === cover ) {
+      deactivate();
+    }
+  }
+
+  function activate( state ) {
+    document.addEventListener( 'keyup', onDocumentKeyUp, false );
+    document.addEventListener( 'click', onDocumentClick, false );
+
+    removeClass( popup, currentState );
+    addClass( popup, 'no-transition' );
+    addClass( popup, state );
+
+    setTimeout( function() {
+      removeClass( popup, 'no-transition' );
+      addClass( container, 'avgrund-active' );
+    }, 0 );
+
+    currentState = state;
+  }
+
+  function deactivate() {
+    document.removeEventListener( 'keyup', onDocumentKeyUp, false );
+    document.removeEventListener( 'click', onDocumentClick, false );
+
+    removeClass( container, 'avgrund-active' );
+  }
+
+  function disableBlur() {
+    addClass( document.documentElement, 'no-blur' );
+  }
+
+  function addClass( element, name ) {
+    element.className = element.className.replace( /\s+$/gi, '' ) + ' ' + name;
+  }
+
+  function removeClass( element, name ) {
+    element.className = element.className.replace( name, '' );
+  }
+
+  window.avgrund = {
+    activate: activate,
+    deactivate: deactivate,
+    disableBlur: disableBlur
+  }
+
+})();
+  </script>
+</body>
+</html>

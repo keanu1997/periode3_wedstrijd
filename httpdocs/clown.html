@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Balloon</title>
+	<link rel="stylesheet" href="scenes.css">
+	<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+	<div class="background clown">
+		<header>
+			<div class="story">
+				<h1>Balloon</h1>
+					<p>Doffe geluiden bonken door je hoofd. De geluiden worden steeds harder en harder. Het klinkt of er honderden vliegjes door je hele hoofd heen vliegen en continu tegen je slaap aan botsen. Je schrikt wakker, kijkt geschokt om je heen. ‘Welkom <span class="name"></span>&nbsp;<span class="ln"></span>, welkom in ons pretpark!’ Je kijkt ruw om je heen waar het geluid vandaan komt. Verderop staat een clown vrolijk naar je te zwaaien met een ballon in zijn hand. Wanneer je dichter bij de clown komt zet hij een brede grijns op. ‘Do you want a balloon?’ vraagt hij met een scherpe, enge stem. Om je heen liggen vreemde, scherpe voorwerpen. Wat ga je doen?</p>
+			</div>
+		</header>
+
+		<div class="main-content"></div>
+
+		<footer>
+			<ul>
+				<li><a href="subs/balloon-choice1.html">De clown ziet er betrouwbaar uit en je pakt de ballon aan.</a></li>
+				<li><a href="ghosthouse.html">Die lach en stem van de clown geeft je een naar gevoel, je besluit het huis in te rennen</a></li>
+				<li><a href="subs/balloon-choice2.html">Je wil die ballon maar bent bang voor de clown, je kijkt rond naar de voorwerpen om je heen.</a></li>
+			</ul>
+		</footer>
+	</div>
+
+	<script>
+		function replaceAll(elSelector, replacement){
+			$(elSelector).each(function(index, el){
+				$(el).text(replacement);
+			});
+		}
+
+		var name = localStorage.getItem('fn');
+		replaceAll('.name', name);
+
+		var ln = localStorage.getItem('nm');
+		replaceAll('.ln', ln);
+
+
+		var bd = localStorage.getItem('bd');
+		replaceAll('.bd', bd);
+	</script>
+</body>
+</html>
